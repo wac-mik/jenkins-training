@@ -1,0 +1,41 @@
+pipeline {
+    agent none
+	options {
+		timestamps()
+	}
+    stages {
+        stage('STAGE-A') {
+            input {
+              message 'Continue?'
+              submitter 'waclaw_mikolajczcyk'
+            }
+            steps {
+                echo STAGE_NAME
+            }
+        }
+		stage ('STAGE-B') {
+            parallel {
+                stage('STAGE-C') {
+                    agent any
+                    steps {
+                        echo STAGE_NAME
+                    }
+                }
+                stage('STAGE-D') {
+                    agent any
+                    steps {
+                        echo STAGE_NAME
+                        sh 'exit 1'
+
+                    }
+                }
+                stage ('STAGE-E') {
+                    agent any
+                    steps {
+                        echo STAGE_NAME
+                    }
+                }
+        }
+    }
+}
+}
