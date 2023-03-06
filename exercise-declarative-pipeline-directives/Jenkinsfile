@@ -1,0 +1,36 @@
+pipeline {
+    agent {
+        label 'slave01'
+    }
+    options {
+        timeout(time: 5, unit: 'MINUTES')
+        disableConcurrentBuilds()
+        buildDiscarder logRotator(artifactDaysToKeepStr: '7', artifactNumToKeepStr: '', daysToKeepStr: '3', numToKeepStr: '')
+        timestamps()
+    }
+    environment {
+        env1 = "test1"
+        env2 = "test2"
+    }
+    stages {
+        stage("Stage 11") {
+            steps {
+                echo env.env1
+                echo env.env2
+            }
+        }
+        stage("Stage 2") {
+            options {
+                timeout(time: 30, unit: 'SECONDS')
+            }
+            steps {
+                sh "sleep 40"
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
