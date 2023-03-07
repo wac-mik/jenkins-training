@@ -23,24 +23,16 @@ pipeline {
     }
 
     stages {
-        stage("Checkout") {
+        stage("Stage 1") {
             steps {
                 script {
-                    scmUtils.checkout(
+                    scmUtils.gitCheckout(
                         branch: params.branch,
                         url: env.gitUrl,
                         credentialsId: env.githubCredentialsId
                     )
                 }
-            }
-        }
-        stage("Create file") {
-            steps {
                 writeFile file: params.fileName, text: params.contentFile
-            }
-        }
-        stage("Git") {
-            steps {
                 script {
                     scmUtils.setGitUserName(env.gitUsername)
                     scmUtils.setGitUserEmail(env.gitUserEmail)
