@@ -19,7 +19,7 @@ def push(params) {
     withCredentials(
         [usernamePassword(credentialsId: params.credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]
     ) {
-        sh "git push https://\${PASSWORD}@github.com/${params.gitHubPath}.git"
+        sh "git push https://\${PASSWORD}@github.com/${params.gitHubPath}"
     }
 }
 
