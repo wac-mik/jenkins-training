@@ -27,7 +27,7 @@ def setGitUserName(username) {
     sh "git config user.name ${username}"
 }
 
-def setGitUserMail(email) {
+def setGitUserEmail(email) {
    sh "git config user.email ${email}"
 }
 
