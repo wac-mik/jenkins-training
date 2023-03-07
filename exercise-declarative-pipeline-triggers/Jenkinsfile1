@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    parameters {
+        choice choices: ['dev', 'stage', 'demo', 'prod'], description: '', name: 'ENVIRONMENT'
+    }
+    stages {
+        stage("Trigger") {
+            steps {
+                error('1')
+            }
+            post {
+                failure {
+                  build job: 'exercise-declarative-pipeline-triggers-b',
+                        parameters: [
+                           string(name: 'ENVIRONMENT', value: params.ENVIRONMENT)
+                        ]
+                }
+            }
+        }
+    }
+
+}

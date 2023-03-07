@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    parameters {
+        choice choices: ['dev', 'stage', 'demo', 'prod'], description: '', name: 'ENVIRONMENT'
+    }
+    stages {
+        stage("print") {
+            steps {
+                println params.ENVIRONMENT
+            }
+        }
+    }
+
+}
