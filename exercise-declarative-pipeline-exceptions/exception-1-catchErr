@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage("Stage 1") {
+            steps {
+                script {
+                    catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE' ) {
+                        docker.image("maven:3-alpine").pull()
+                    }
+                }
+            }
+        }
+        stage("Stage 2") {
+            steps {
+                script {
+                    catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE' ) {
+                        docker.image("maven:error").pull()
+                    }
+                }
+            }
+        }
+    }
+}

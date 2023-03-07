@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    stages {
+        stage("Stage 1") {
+            steps {
+                script {
+                    try {
+                        docker.image("maven:3-alpine").pull()
+                    }
+                    catch (Exception e) {
+                        currentBuild.result = 'UNSTABLE'
+                        println "exception ${e}"
+                    }
+                }
+            }
+        }
+        stage("Stage 2") {
+            steps {
+                script {
+                    try {
+                        docker.image("maven:error").pull()
+                    }
+                    catch (Exception e) {
+                        currentBuild.result = 'UNSTABLE'
+                        println "exception ${e}"
+                    }
+                }
+            }
+        }
+    }
+}
