@@ -8,7 +8,7 @@ pipeline {
         gitUrl = "https://github.com/wac-mik/sandbox.git"
         gitUsername = "Waclaw Mikolajczyk"
         gitUserEmail = "user@mail.com"
-        gitHubPath = "wac-mik/sandbox.git"
+        gitHubPath = "wac-mik/sandbox"
     }
 
     options {
@@ -16,7 +16,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'branch', defaultValue: 'main', description: 'branch to checkout')
+        string(name: 'branch', defaultValue: 'master', description: 'branch to checkout')
         string(name: 'fileName' ,description: 'Filename to commit' )
         string(name: 'contentFile', description: 'Content of the filename')
         string(name: 'commitMessage', description: 'Commit message')
